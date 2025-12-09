@@ -105,7 +105,7 @@ class QuestionViewController: UIViewController {
         if selectedIsCorrect {
             sender.backgroundColor = .systemGreen
             // Notificar acierto y volver tras un breve delay
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) { [weak self] in
                 guard let self = self else { return }
                 if let catIdx = self.categoryIndex {
                     self.onAnsweredCorrectly?(catIdx)
@@ -113,9 +113,15 @@ class QuestionViewController: UIViewController {
                 self.navigationController?.popViewController(animated: true)
             }
         } else {
+            // Pintar la elegida en rojo
             sender.backgroundColor = .systemRed
-            // Volver sin marcar la estrella
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+            // Encontrar y pintar en verde la correcta
+            if let correctIndex = q.options.firstIndex(where: { $0.isCorrect }),
+               let correctButton = buttonForIndex(correctIndex) {
+                correctButton.backgroundColor = .systemGreen
+            }
+            // Volver sin marcar la estrella (no se llama onAnsweredCorrectly)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             }
         }
@@ -127,6 +133,16 @@ class QuestionViewController: UIViewController {
         case answer2: return 1
         case answer3: return 2
         case answer4: return 3
+        default: return nil
+        }
+    }
+
+    private func buttonForIndex(_ index: Int) -> UIButton? {
+        switch index {
+        case 0: return answer1
+        case 1: return answer2
+        case 2: return answer3
+        case 3: return answer4
         default: return nil
         }
     }
