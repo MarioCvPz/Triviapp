@@ -40,8 +40,8 @@
                                         <color key="textColor" systemColor="systemGreenColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-Cs-HqU">
-                                        <rect key="frame" x="32" y="64" width="328" height="445"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-Cs-HqU">
+                                        <rect key="frame" x="8" y="63" width="377" height="412"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="412" id="QT3-Ea-brE"/>
@@ -210,7 +210,7 @@ y descubrir si eres un verdadero maestro del conocimiento?
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Question" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="94k-Fa-RnU">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Question" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="94k-Fa-RnU">
                                         <rect key="frame" x="41" y="42.333333333333343" width="311" height="119"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
