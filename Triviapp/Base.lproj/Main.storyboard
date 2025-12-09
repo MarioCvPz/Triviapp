@@ -40,14 +40,14 @@
                                         <color key="textColor" systemColor="systemGreenColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-Cs-HqU">
-                                        <rect key="frame" x="8" y="63" width="377" height="412"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cdA-Cs-HqU">
+                                        <rect key="frame" x="32" y="64" width="328" height="445"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="412" id="QT3-Ea-brE"/>
                                             <constraint firstAttribute="width" constant="377" id="oS3-bl-tjC"/>
                                         </constraints>
-                                        <mutableString key="text">Prepárate para poner a prueba tu ingenio, tu memoria… ¡y tu velocidad mental!
+                                        <string key="text">Prepárate para poner a prueba tu ingenio, tu memoria… ¡y tu velocidad mental!
 Demuestra cuánto sabes en categorías como Geografía, Arte, Historia, Entretenimiento,
 Ciencia y Deportes.
 
@@ -58,7 +58,7 @@ Cada partida es diferente, cada pregunta un reto,
 y descubrir si eres un verdadero maestro del conocimiento?
 
 🎲 Tira el dado, acepta el desafío…
-¡y que comience la diversión!</mutableString>
+¡y que comience la diversión!</string>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -204,21 +204,77 @@ y descubrir si eres un verdadero maestro del conocimiento?
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6tw-eh-vPX">
                                 <rect key="frame" x="0.0" y="172" width="393" height="612"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="CATEGORIA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-4t-iKG">
-                                        <rect key="frame" x="8" y="8" width="377" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CATEGORIA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vfJ-4t-iKG">
+                                        <rect key="frame" x="8" y="7.9999999999999982" width="377" height="26.333333333333329"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9OH-J1-dF1">
-                                        <rect key="frame" x="8" y="558" width="377" height="54"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Question" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="94k-Fa-RnU">
+                                        <rect key="frame" x="41" y="42.333333333333343" width="311" height="119"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="119" id="Uj0-le-zQ8"/>
+                                        </constraints>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="21"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aqa-V5-woe">
+                                        <rect key="frame" x="26" y="282.33333333333331" width="341" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Qdn-k4-6YR"/>
+                                        </constraints>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="PREGUNTA ACERTADA"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EGu-Fq-wQu">
+                                        <rect key="frame" x="26" y="343.33333333333337" width="341" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="Jb6-Xq-Mkq"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lpn-Db-7c3">
+                                        <rect key="frame" x="26" y="404.33333333333337" width="341" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="uJc-j3-4NT"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STb-ji-XTP">
+                                        <rect key="frame" x="26" y="221.33333333333331" width="341" height="45"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="45" id="BlZ-zi-5Ep"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="EGu-Fq-wQu" firstAttribute="leading" secondItem="6tw-eh-vPX" secondAttribute="leading" constant="26" id="4SZ-GT-TSU"/>
+                                    <constraint firstAttribute="trailing" secondItem="vfJ-4t-iKG" secondAttribute="trailing" constant="8" id="5Un-uF-NAn"/>
+                                    <constraint firstAttribute="trailing" secondItem="Aqa-V5-woe" secondAttribute="trailing" constant="26" id="7CZ-Nx-dhG"/>
+                                    <constraint firstItem="vfJ-4t-iKG" firstAttribute="top" secondItem="6tw-eh-vPX" secondAttribute="top" constant="8" id="8jQ-Kl-aXb"/>
+                                    <constraint firstItem="94k-Fa-RnU" firstAttribute="leading" secondItem="6tw-eh-vPX" secondAttribute="leading" constant="41" id="Jyn-fw-KOh"/>
+                                    <constraint firstItem="vfJ-4t-iKG" firstAttribute="leading" secondItem="6tw-eh-vPX" secondAttribute="leading" constant="8" id="MpY-j4-IQ7"/>
+                                    <constraint firstAttribute="trailing" secondItem="94k-Fa-RnU" secondAttribute="trailing" constant="41" id="O5Y-Uh-p5v"/>
+                                    <constraint firstItem="STb-ji-XTP" firstAttribute="top" secondItem="94k-Fa-RnU" secondAttribute="bottom" constant="60" id="REm-QP-y92"/>
+                                    <constraint firstItem="EGu-Fq-wQu" firstAttribute="top" secondItem="Aqa-V5-woe" secondAttribute="bottom" constant="16" id="S20-gk-pHL"/>
+                                    <constraint firstAttribute="trailing" secondItem="STb-ji-XTP" secondAttribute="trailing" constant="26" id="aMb-pH-k1l"/>
+                                    <constraint firstItem="Lpn-Db-7c3" firstAttribute="top" secondItem="EGu-Fq-wQu" secondAttribute="bottom" constant="16" id="bFz-n2-VM5"/>
+                                    <constraint firstItem="Lpn-Db-7c3" firstAttribute="leading" secondItem="6tw-eh-vPX" secondAttribute="leading" constant="26" id="coG-Lf-Skx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lpn-Db-7c3" secondAttribute="trailing" constant="26" id="k6d-SJ-mUG"/>
+                                    <constraint firstItem="Aqa-V5-woe" firstAttribute="leading" secondItem="6tw-eh-vPX" secondAttribute="leading" constant="26" id="o6J-pa-d4z"/>
+                                    <constraint firstItem="Aqa-V5-woe" firstAttribute="top" secondItem="STb-ji-XTP" secondAttribute="bottom" constant="16" id="of8-pq-8o5"/>
+                                    <constraint firstItem="94k-Fa-RnU" firstAttribute="top" secondItem="vfJ-4t-iKG" secondAttribute="bottom" constant="8" symbolic="YES" id="pG1-qa-u4C"/>
+                                    <constraint firstItem="STb-ji-XTP" firstAttribute="leading" secondItem="6tw-eh-vPX" secondAttribute="leading" constant="26" id="tnL-0Y-e5O"/>
+                                    <constraint firstAttribute="trailing" secondItem="EGu-Fq-wQu" secondAttribute="trailing" constant="26" id="yOL-aM-pEa"/>
+                                    <constraint firstItem="94k-Fa-RnU" firstAttribute="top" secondItem="vfJ-4t-iKG" secondAttribute="bottom" constant="8" symbolic="YES" id="zBD-O4-Wr8"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="z0F-Ox-U7c"/>
@@ -232,8 +288,12 @@ y descubrir si eres un verdadero maestro del conocimiento?
                     </view>
                     <navigationItem key="navigationItem" id="ZHS-7g-9Xm"/>
                     <connections>
+                        <outlet property="answer1" destination="STb-ji-XTP" id="BGM-ki-qur"/>
+                        <outlet property="answer2" destination="Aqa-V5-woe" id="Tyg-h0-Xgw"/>
+                        <outlet property="answer3" destination="EGu-Fq-wQu" id="6cl-Mb-ZyL"/>
+                        <outlet property="answer4" destination="Lpn-Db-7c3" id="IdX-6m-75f"/>
                         <outlet property="categoryLabel" destination="vfJ-4t-iKG" id="0Py-Bi-fii"/>
-                        <outlet property="preguntaAcertadaButton" destination="9OH-J1-dF1" id="OCX-Dl-aQ1"/>
+                        <outlet property="questionTextView" destination="94k-Fa-RnU" id="Xi4-Ho-gy1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B5t-iK-rhs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

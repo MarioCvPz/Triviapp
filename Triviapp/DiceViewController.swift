@@ -40,9 +40,15 @@ class DiceViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Botón atrás personalizado con confirmación
+        setupCustomBackButton()
+
         QuesitosCollectionView.dataSource = self
         QuesitosCollectionView.delegate = self
         QuesitosCollectionView.isScrollEnabled = false
+
+        // Desactivar el gesto de "swipe back" para evitar salir sin confirmar
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
 
         // Layout fijo: 3x2 con celdas 65x65
         if let flow = QuesitosCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -83,10 +89,16 @@ class DiceViewController: UIViewController, UICollectionViewDataSource, UICollec
         diceScene.backgroundColor = .white
         diceScene.autoenablesDefaultLighting = false
 
-        // Cámara ajustada para ver el dado centrado en y=0
+        // Cámara isométrica: ortográfica y a ~45° mirando al origen
         let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3(0, 1.8, 4.8)
+        let camera = SCNCamera()
+        camera.usesOrthographicProjection = true
+        camera.orthographicScale = 5.0  // Ajusta si quieres ver el dado más grande/pequeño
+        camera.zNear = 0.1
+        camera.zFar = 100
+        cameraNode.camera = camera
+
+        cameraNode.position = SCNVector3(0, 4.8, 4.8) // ~45° de elevación
         cameraNode.look(at: SCNVector3(0, 0, 0))
         scene.rootNode.addChildNode(cameraNode)
 
@@ -121,12 +133,12 @@ class DiceViewController: UIViewController, UICollectionViewDataSource, UICollec
         createDice(on: scene)
     }
 
-    // Inclinación suave para que la cara superior sea más visible
-    private let initialTilt = SCNVector3(-0.21, 0.17, 0.0) // ~ -12° en X, +10° en Y
+    // Inclinación tipo “isométrica” para ver mejor la cara superior sin cambiar el resultado
+    private let initialTilt = SCNVector3(-0.55, 0.08, 0.0)
 
     func createDice(on scene: SCNScene) {
-        // Dado 15% más pequeño que el original (2.8 -> 2.38, 0.4 -> 0.34)
-        let box = SCNBox(width: 2.38, height: 2.38, length: 2.38, chamferRadius: 0.34)
+        // Dado un poco más grande que antes (~20% más)
+        let box = SCNBox(width: 2.85, height: 2.85, length: 2.85, chamferRadius: 0.40)
         box.materials = createDiceMaterials()
 
         diceNode = SCNNode(geometry: box)
@@ -186,7 +198,7 @@ class DiceViewController: UIViewController, UICollectionViewDataSource, UICollec
         diceNode.eulerAngles = SCNVector3Zero
 
         let spinDuration: TimeInterval = 0.6
-        let settleDuration: TimeInterval = 1
+        let settleDuration: TimeInterval = 1.0
 
         let randomTurnsX = Float.random(in: 1.5...2.5) * 2 * Float.pi
         let randomTurnsY = Float.random(in: 1.5...2.5) * 2 * Float.pi
@@ -309,6 +321,12 @@ class DiceViewController: UIViewController, UICollectionViewDataSource, UICollec
             let pass: (QuestionViewController) -> Void = { qvc in
                 qvc.category = self.currentCategory
                 qvc.categoryIndex = self.selectedCategoryIndex
+
+                if let idx = self.selectedCategoryIndex {
+                    let qs = QuestionBank.questions(for: idx)
+                    qvc.question = qs.randomElement()
+                }
+
                 qvc.onAnsweredCorrectly = { [weak self] index in
                     guard let self = self else { return }
                     self.completedCategories.insert(index)
@@ -354,6 +372,44 @@ class DiceViewController: UIViewController, UICollectionViewDataSource, UICollec
         hideCategorySheet()
     }
 
+    // MARK: - Back button con confirmación
+
+    private func setupCustomBackButton() {
+        navigationItem.hidesBackButton = true
+        let backItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                       style: .plain,
+                                       target: self,
+                                       action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem = backItem
+    }
+
+    @objc private func backButtonTapped() {
+        confirmExit()
+    }
+
+    private func confirmExit() {
+        let alert = UIAlertController(title: "Salir de la partida",
+                                      message: "Vas a cerrar la partida y perderás tu progreso. ¿Quieres continuar?",
+                                      preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cerrar partida", style: .destructive, handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.hideCategorySheet(animated: false)
+
+            // Restablecer estado si quieres empezar limpio al volver
+            self.completedCategories.removeAll()
+            self.QuesitosCollectionView.reloadData()
+
+            // Volver atrás
+            if let nav = self.navigationController {
+                nav.popViewController(animated: true)
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+
     // MARK: - UICollectionView DataSource/Delegate
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -380,8 +436,8 @@ class DiceViewController: UIViewController, UICollectionViewDataSource, UICollec
             cell.contentView.addSubview(starView)
             NSLayoutConstraint.activate([
                 starView.centerXAnchor.constraint(equalTo: cell.contentView.centerXAnchor),
-                starView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor, constant: -6),
-                starView.heightAnchor.constraint(equalToConstant: 20),
+                starView.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor),
+                starView.heightAnchor.constraint(equalToConstant: 65),
                 starView.widthAnchor.constraint(equalTo: starView.heightAnchor)
             ])
             starView.isHidden = !isCompleted
